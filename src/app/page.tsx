@@ -11,6 +11,7 @@ export default async function HomePage() {
 
   return(
     <div>
+      <h1 className="text-2xl font-bold mb-5">welcome  </h1>
       <h1>welcome </h1>
       <p>hello world</p>
       <p>반갑습니다, {user?.firstName }</p>
