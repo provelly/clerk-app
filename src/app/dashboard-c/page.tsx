@@ -1,6 +1,6 @@
+// src/app/dashboard-c/page.tsx
 'use client'
 import { useUser } from '@clerk/nextjs'
-import { ClientPageRoot } from 'next/dist/client/components/client-page'
 import React from 'react'
 
 export default function DashboardCPage() {
@@ -17,17 +17,52 @@ export default function DashboardCPage() {
     )
   }
 
-  return (
-    <div>
-      <h1 className='text-2x1 font-bold mb-5'>Dashboard(Client-side) </h1>
-      <div className='mb-5'>
-        <p>use client 지시자 사용함 </p>
-        <p>브라우저에서 useUser() 함수 이용</p>
-        <p>Welcome, {user?.firstName}!</p>
-        <p>Email: {user?.primaryEmailAddress?.emailAddress}</p>
+  // Project data array for easy mapping
+  const projects = [
+    { name: 'Assign 1 Project', url: 'https://92213172.vercel.app/' },
+    { name: 'Assign 2 Project', url: 'https://assign2-umber.vercel.app/' },
+    { name: 'Assign 3 Project', url: 'https://assign3-neon.vercel.app/' },
+    
+  ];
 
+  return (
+    <div className='p-6'>
+      <h1 className='text-3xl font-extrabold text-blue-800 mb-6 text-center border-b-4 border-blue-500 pb-3'>
+        about-me
+      </h1>
+      
+      {/* User Info Section (기존 정보) */}
+      <div className='bg-blue-50 p-6 rounded-xl shadow-md mb-8 border border-blue-200'>
+        <h2 className='text-2xl font-bold mb-4 text-blue-700'>
+          황인성
+        </h2>
+        <p className='text-gray-700 mb-1'>학번: 92213172</p>
+        <p className='text-gray-700 mb-1'>중부대학교 재학생</p>
+        <p className='text-gray-700 mb-1'>생년월일: 2003/12/12</p>
+        
       </div>
 
+      {/* Projects Section (추가된 프로젝트 버튼) */}
+      <div className='space-y-4'>
+        <h2 className='text-2xl font-bold text-blue-800 mb-4'>
+          🚀 포트폴리오 프로젝트 소개
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {projects.map((project) => (
+            <a
+              key={project.name}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-4 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition transform hover:scale-[1.02] duration-200 text-center font-medium"
+            >
+              <span className="block text-lg">{project.name}</span>
+              <span className="block text-xs opacity-80 mt-1">바로가기: {new URL(project.url).hostname}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
