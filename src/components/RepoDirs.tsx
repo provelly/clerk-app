@@ -6,7 +6,7 @@ interface RepoProps {
 }
 
 export default async function RepoDirs({ name }: RepoProps) {
-  const username = 'bradtraversy'
+  const username = 'provelly'
   await new Promise((resolve) => setTimeout(resolve, 2000))
   const response = await fetch(
     `https://api.github.com/repos/${username}/${name}/contents`,
