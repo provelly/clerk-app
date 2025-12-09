@@ -1,21 +1,16 @@
 import Repo from '@/components/Repo'
-import RepoDirs from '@/components/RepoDirs'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
-export default function RepoPage({ params }: { params: { name: string } }) {
+
+export default function ReposPage() {
+  // 본인의 GitHub 아이디로 변경하세요
+  const username = 'provelly';
+
   return (
-    <div className="flex flex-col justify-start items-start max-w-lg">
-      <Link
-        href="/repos"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-      >
-        Back to Repositories
-      </Link>
-      <Suspense fallback={<div>Loading repo...</div>}>
-        <Repo name={params.name} />
-      </Suspense>
-      <Suspense fallback={<div>Loading directories...</div>}>
-        <RepoDirs name={params.name} />
+    <div className='p-4 container mx-auto'>
+      <h1 className="text-3xl font-bold mb-6">내 GitHub 저장소 목록</h1>
+      <Suspense fallback={<div>Loading repositories...</div>}>
+        <Repo username={username} />
       </Suspense>
     </div>
   )
