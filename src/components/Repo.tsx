@@ -56,3 +56,40 @@ const Repo = async ({ username }: { username: string }) => {
 
   return (
     <>
+      <h2 className="text-2xl font-bold mb-4">최근 저장소</h2>
+      
+      {/* 데이터가 없을 경우 안내 메시지 */}
+      {nonForkRepos.length === 0 ? (
+        <p className="text-gray-500">
+          표시할 저장소가 없거나, GitHub API 한도를 초과했습니다.
+        </p>
+      ) : (
+        <ul>
+          {nonForkRepos.map((repo: Repo) => (
+            <li key={repo.id} className="bg-white p-4 rounded-lg shadow mb-4 hover:bg-gray-50 transition">
+              <Link href={repo.html_url} target="_blank">
+                <h3 className="text-xl font-bold mb-2">{repo.name}</h3>
+                <p className="text-gray-600 mb-4 truncate">
+                  {repo.description || '설명이 없습니다.'}
+                </p>
+                <div className="flex gap-4 text-gray-500 text-sm">
+                  <span className="flex items-center gap-1">
+                    <FaStar className="text-yellow-500" /> {repo.stargazers_count}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaCodeBranch className="text-blue-500" /> {repo.forks_count}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaEye className="text-green-500" /> {repo.watchers_count}
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+};
+
+export default Repo;
